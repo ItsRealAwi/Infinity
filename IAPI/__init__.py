@@ -8,4 +8,4 @@ import webbrowser as __webb
 import os as __os
 
 def showdocumentation():
-  __webb.open("https:")
+  __webb.open("https://itsrealawi.github.io/Infinity/")
