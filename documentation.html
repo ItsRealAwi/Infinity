@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAPI Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("pre code").forEach(el => {
+                hljs.highlightElement(el);
+            });
+
+            const pages = Array.from(document.querySelectorAll("[class^='list-']"));
+            let currentPage = 1;
+            
+            function showPage(pageNumber) {
+                pages.forEach(page => page.style.display = "none");
+                const selectedPage = document.querySelector(`.list-${pageNumber}`);
+                if (selectedPage) {
+                    selectedPage.style.display = "block";
+                    currentPage = pageNumber;
+                }
+                updateNav();
+            }
+
+            function updateNav() {
+                const pageNumbers = pages.map(page => parseInt(page.className.match(/list-(\d+)/)[1]));
+                const minPage = Math.min(...pageNumbers);
+                const maxPage = Math.max(...pageNumbers);
+                document.getElementById("prev").textContent = currentPage > minPage ? `< ${currentPage - 1}` : `< ${maxPage}`;
+                document.getElementById("next").textContent = currentPage < maxPage ? `${currentPage + 1} >` : `${minPage} >`;
+                document.getElementById("currentPage").textContent = `Page ${currentPage}`;
+            }
+
+            document.getElementById("prev").addEventListener("click", () => {
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                } else {
+                    showPage(Math.max(...pages.map(page => parseInt(page.className.match(/list-(\d+)/)[1]))));
+                }
+            });
+
+            document.getElementById("next").addEventListener("click", () => {
+                const maxPage = Math.max(...pages.map(page => parseInt(page.className.match(/list-(\d+)/)[1])));
+                if (currentPage < maxPage) {
+                    showPage(currentPage + 1);
+                } else {
+                    showPage(1);
+                }
+            });
+
+            showPage(1);
+        });
+    </script>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1e90ff, #ff6a00);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        .documentation {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #111;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        h2 {
+            color: #1e90ff;
+            font-size: 2em;
+        }
+        p {
+            font-size: 1.1em;
+        }
+        pre {
+            background-color: #111;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            font-size: 1.5em;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .nav-button {
+            background-color: #1e90ff;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        .page-number {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 15px;
+        }
+
+        .python-download-button {
+            background-color: #1e90ff;
+            color: white;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        .python-download-button:hover {
+            background-color: #ff6a00;
+        }
+    </style>
+</head>
+<body>
+    <h1>IAPI (Infinity API)</h1>
+    
+    <div class="pagination">
+        <button id="prev" class="nav-button"></button>
+        <span id="currentPage" class="page-number">Page 1</span>
+        <button id="next" class="nav-button"></button>
+    </div>
+
+    <div class="list-1 documentation">
+        <h1>Install The Infinity</h1>
+        <div class="documentation">
+            <h2>Go to the site python.org</h2>
+        </div>
+
+    </div>
+    <div class="list-2 documentation">Page 2 Content</div>
+    <div class="list-3 documentation">Page 3 Content</div>
+    <div class="list-4 documentation">Page 4 Content</div>
+    <div class="list-5 documentation">Page 5 Content</div>
+    <div class="list-6 documentation">Page 6 Content</div>
+    <div class="list-7 documentation">Page 7 Content</div>
+    <div class="list-8 documentation">Page 8 Content</div>
+    <div class="list-9 documentation">Page 9 Content</div>
+    <div class="list-10 documentation">Page 10 Content</div>
+    <div class="list-11 documentation">Page 11 Content</div>
+    <div class="list-12 documentation">Page 12 Content</div>
+
+</body>
+</html>
